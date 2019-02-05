@@ -6,6 +6,21 @@ export default Controller.extend({
 
       service.set('active', !service.active);
 
+    },
+
+    ajouterPromo(model) {
+      model.codesPromos.forEach(function(code) {
+        if(model.tentativePromo == code.name)
+        {
+          code.set('active', true);
+        }
+      });
+    },
+
+    supprimerCode(code) {
+
+      code.set('active',false);
+
     }
   }
 });

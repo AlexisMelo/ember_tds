@@ -1,46 +1,114 @@
 {{outlet}}
 
-<div class="row rounded mt-5 shadow" style="background-color : #ecf0f1;">
+<div class="row rounded my-5 pb-5 shadow" style="background-color : #ecf0f1;">
   <div class="col">
-    <div class="row shadow-sm bg-warning">
+    <div class="row shadow rounded py-2" style="background-color : #2980b9;">
       <div class="col text-center text-monospace " style="color:white;">
-        <h1>Service</h1>
+        <h1 class="mb-0">Services</h1>
       </div>
     </div>
-    <div class="row mt-2">
+    <div class="row my-4">
+      <div class="col">
+        <h2 class="m-0">Choisissez les élements à inclure : </h2>
+      </div>
       <div class="col text-center">
-        <h2>Choisissez les élements à inclure</h2>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col text-center">
-        <h3>{{model.informationServicesSelectionnes}}</h3>
+        <h2 class="m-0">{{model.informationServicesSelectionnes}}</h2>
       </div>
     </div>
 
-    {{#each model.services as |service|}}
-      <button {{action "toggleActive" service }} type="button" class="btn btn-primary btn-lg btn-block" style="border:none; background-color: {{if service.active "limegreen" "lightslategrey"}}">{{service.name}}</button>
-    {{/each}}
+    <hr>
 
+    <div class="row ">
+      <div class="col my-5">
+        {{#each model.services as |service|}}
+          <div class="row my-2 justify-content-center">
+            <div class="col">
+              <button {{action "toggleActive" service }} type="button"
+                                                         class="btn btn-primary btn-lg btn-block shadow-sm"
+                                                         style="border:none; background-color: {{if service.active
+                                                                                                    "#27ae60"
+                                                                                                    "#bdc3c7"}}">
 
-    <div>gt
-      <p>Total : {{model.sommeActifs}} €</p>
+                <div class="row py-1">
+                  <div class="col text-left">
+                    {{service.name}}
+                  </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            {{input type="checkbox" name="promo" checked=false}}
+                  <div class="col text-right">
+                    {{service.price}}
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <div class="col">
+
+        <div class="row mx-5">
+          <div class="col text-left">
+            <h4>Total services :</h4>
+          </div>
+          <div class="col text-right">
+            <h4>{{model.sommeActifs}} €</h4>
           </div>
         </div>
-        {{input type="text" value=this.promo class="form-control"}}
+
+        {{#if model.sommeActifs }}
+
+        <hr>
+
+        <div class="row mx-5">
+          <div class="col">
+            <div class="input-group mb-3">
+              {{input value=model.tentativePromo type="text" class="form-control" placeholder="Code promo"
+                      aria-describedby="button-addon2" }}
+              <div class="input-group-append">
+                <button {{action "ajouterPromo" model }} class="btn btn-success text-white border-" type="button"
+                                                         id="button-addon2">Ajouter
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row px-3">
+          {{#each model.codesPromosActifs as |codeActif|}}
+            <div class="col-auto px-1 py-1">
+              <button {{action "supprimerCode" codeActif}} type="button"
+                                                           class="btn btn-danger">{{codeActif.name}}</button>
+            </div>
+          {{/each}}
+        </div>
+
+        {{#if model.sommeRemises }}
+          <div class="row mt-3 mx-5">
+            <div class="col text-left">
+              <h4>Total remises : </h4>
+            </div>
+            <div class="col text-right">
+              <h4>{{model.sommeRemises}} €</h4>
+            </div>
+          </div>
+        {{/if}}
+
+
+        <hr>
+
+        <div class="row mx-5">
+          <div class="col text-left">
+            <h4>Total : </h4>
+          </div>
+          <div class="col text-right">
+            <h4>{{model.sommeAvecRemise}} €</h4>
+          </div>
+        </div>
+
+        {{/if}}
+
       </div>
 
-      {{#if model.remise}}
-
-        <p>Remise : {{model.remise}} €</p>
-
-        <p>Total avecc remise : {{model.totalRemise}} €</p>
-      {{/if}}
 
     </div>
 

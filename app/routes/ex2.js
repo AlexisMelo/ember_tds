@@ -4,7 +4,9 @@ import { filterBy } from '@ember/object/computed';
 
 const Services = EmberObject.extend({
   services: null,
-  codePromo: null,
+  tentativePromo : null,
+  codesPromos: null,
+  codesPromosActifs: filterBy('codesPromos','active',true),
   listeActifs: filterBy('services', 'active', true),
   sommeActifs : computed('listeActifs', function() {
     let total = 0;
@@ -22,13 +24,32 @@ const Services = EmberObject.extend({
       default :
         return this.listeActifs.length + ' services sélectionnés';
     }
+  }),
+  sommeRemises : computed('codesPromosActifs', function() {
+    let total = 0;
+    this.codesPromosActifs.forEach(function (s) {
+      if (s.active) {
+        total += s.price;
+      }
+    });
+    return total;
+  }),
+  sommeAvecRemise : computed('sommeRemises','sommeActifs',function () {
+    if (this.sommeActifs - this.sommeRemises < 0 ) return 0;
+    return this.sommeActifs - this.sommeRemises;
   })
 })
 
 const Service = EmberObject.extend({
   name : 'default',
   price : 0,
-  active : true
+  active : false
+})
+
+const codePromo = EmberObject.extend({
+  name : '',
+  reduction : 0,
+  active : false
 })
 
 export default Route.extend({
@@ -44,23 +65,41 @@ export default Route.extend({
         }),
         Service.create({
           name : 'Design',
-          price : 2000,
-          active : false
+          price : 2000
         }),Service.create({
           name : 'Integration',
-          price : 650,
-          active : false
+          price : 650
         }),Service.create({
           name : 'Formation',
-          price : 1200,
-          active : false
+          price : 1200
         })
       ],
-      codePromo: {
-        "B22":0.05,
-        "AZ":0.01,
-        "UBOAT":0.02
-      }
+      codesPromos:[
+        codePromo.create({
+          name : 'HyperCodePromo',
+          price : 1000
+        }),
+        codePromo.create({
+          name : 'SuperCodePromo',
+          price : 500
+        }),
+        codePromo.create({
+          name : 'PetitCodePromo',
+          price : 100
+        }),
+        codePromo.create({
+          name : 'CodeSympa',
+          price : 1200
+        }),
+        codePromo.create({
+          name : 'LeCode',
+          price : 250
+        }),
+        codePromo.create({
+          name : 'AZ',
+          price : 1
+        })
+      ]
 
     });
   }
