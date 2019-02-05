@@ -1,0 +1,48 @@
+{{outlet}}
+
+<div class="row rounded mt-5 shadow" style="background-color : #ecf0f1;">
+  <div class="col">
+    <div class="row shadow-sm bg-warning">
+      <div class="col text-center text-monospace " style="color:white;">
+        <h1>Service</h1>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col text-center">
+        <h2>Choisissez les élements à inclure</h2>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <h3>{{model.informationServicesSelectionnes}}</h3>
+      </div>
+    </div>
+
+    {{#each model.services as |service|}}
+      <button {{action "toggleActive" service }} type="button" class="btn btn-primary btn-lg btn-block" style="border:none; background-color: {{if service.active "limegreen" "lightslategrey"}}">{{service.name}}</button>
+    {{/each}}
+
+
+    <div>gt
+      <p>Total : {{model.sommeActifs}} €</p>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            {{input type="checkbox" name="promo" checked=false}}
+          </div>
+        </div>
+        {{input type="text" value=this.promo class="form-control"}}
+      </div>
+
+      {{#if model.remise}}
+
+        <p>Remise : {{model.remise}} €</p>
+
+        <p>Total avecc remise : {{model.totalRemise}} €</p>
+      {{/if}}
+
+    </div>
+
+  </div>
+</div>
