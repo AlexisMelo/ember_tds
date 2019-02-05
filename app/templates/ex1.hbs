@@ -1,0 +1,25 @@
+{{outlet}}
+
+
+{{textarea id="txt" class="form-control mt-5 mb-3" placeholder="je compte super vite zebi" value=model.content }}
+
+<div><p id="car">Caractères restants : {{model.sizeinterdit}} </p></div>
+
+<div class="row">
+  <div class="col-auto">
+    <button class="btn btn-lg btn-success" {{action "save" model}}>Enregistrer</button>
+  </div>
+
+  {{#if model.alertVisible }}
+    <div class="col">
+
+      <p class="py-3 rounded shadow text-monospace font-weight-bold {{model.style}}"
+         style="color: white;">{{model.info}}</p>
+    </div>
+
+  {{/if}}
+
+</div>
+
+
+{{outlet}}
