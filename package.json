@@ -37,6 +37,8 @@
     "ember-cli-uglify": "^2.1.0",
     "ember-data": "~3.7.0",
     "ember-export-application-global": "^2.0.0",
+    "ember-font-awesome": "^4.0.0-rc.4",
+    "ember-jquery": "^1.0.5",
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-qunit": "^3.4.1",
@@ -49,5 +51,8 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
+  },
+  "dependencies": {
+    "material-design-icons": "^3.0.1"
   }
 }

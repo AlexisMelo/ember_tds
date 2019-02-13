@@ -1,0 +1,50 @@
+{{outlet}}
+<style>
+  .flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+  }
+</style>
+<div class="row rounded my-5 shadow" style="background-color : #ecf0f1;">
+  <div class="col">
+    <div class="row shadow rounded py-2" style="background-color : #8e44ad;">
+      <div class="col text-center text-monospace " style="color:white;">
+        <h1 class="mb-0">Sélectionnez vos produits</h1>
+      </div>
+    </div>
+    <div class="row my-4 d-flex align-items-center">
+      <div class="col"> {{! liste dispos }}
+        {{multi-select elements=model.dispoItems selectedIds=model.dispoItemsIds_}}
+
+      </div>
+      <div class="col-1 d-flex flex-column"> {{! les bouttons }}
+
+        <button  {{action "addToIncluded" model }} type="button" class="flip my-1 btn btn-success d-flex justify-content-center"><i class="material-icons">
+          add
+        </i></button>
+
+        <button {{action "addAllToIncluded" model }}  type="button" class="flip my-1 btn btn-success d-flex justify-content-center"><i class="material-icons">
+          reply_all
+        </i></button>
+
+        <button {{action "removeFromIncluded" model }}  type="button" class=" my-1 btn btn-danger d-flex justify-content-center"><i class="material-icons">
+          remove
+        </i></button>
+
+        <button {{action "RemoveAllFromIncluded" model }}  type="button" class=" my-1 btn btn-danger d-flex justify-content-center"><i class="material-icons">
+          reply_all
+        </i></button>
+
+      </div>
+      <div class="col"> {{! liste selectionnés }}
+        {{multi-select elements=model.includedItems selectedIds=model.includedItemsIds_}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
