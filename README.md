@@ -1,7 +1,11 @@
-# ember-td1
+# emberJs - Initiation
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The point of this repository is to give several exemples of how to get started with EmberJs
+
+### Deploying
+
+This app has no real interest in being deployed on a server but rather being installed locally 
+to see what can be done with EmberJs and give examples
 
 ## Prerequisites
 
@@ -43,10 +47,6 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * `ember build` (development)
 * `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
 
 ## Further Reading / Useful Links
 
