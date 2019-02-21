@@ -1,25 +1,57 @@
 {{outlet}}
 
-
-{{textarea id="txt" class="form-control mt-5 mb-3" placeholder="je compte super vite zebi" value=model.content }}
-
-<div><p id="car">Caractères restants : {{model.sizeinterdit}} </p></div>
-
-<div class="row">
-  <div class="col-auto">
-    <button class="btn btn-lg btn-success" {{action "save" model}}>Enregistrer</button>
-  </div>
-
-  {{#if model.alertVisible }}
-    <div class="col">
-
-      <p class="py-3 rounded shadow text-monospace font-weight-bold {{model.style}}"
-         style="color: white;">{{model.info}}</p>
+<div class="row rounded my-5 shadow" style="background-color : #ecf0f1;">
+  <div class="col">
+    <div class="row shadow rounded py-2" style="background-color :#e67e22;">
+      <div class="col text-center text-monospace " style="color:white;">
+        <h1 class="mb-0">Rédigez une note</h1>
+      </div>
     </div>
 
-  {{/if}}
+    <div class="row align-items-center">
 
+      <div class="col-9">
+
+        <div class="row align-items-center">
+
+          <div class="col">
+            {{textarea id="txt" maxlength=model.MAX class="form-control" placeholder="Entrez votre texte..." value=model.content }}
+          </div>
+
+
+        </div>
+
+        <div class="row mt-4">
+          <div class="col">
+            <div class="progress shadow-sm" style="background-color: #d3dcde">
+              <div class="progress-bar shadow progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{model.sizeused}}" aria-valuemin="0" aria-valuemax="{{model.MAX}}" style="width: {{model.pourcentageAvancement}}%; background-color: {{model.styleBarre}}">{{model.sizeused}} / {{model.MAX}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-3 rounded shadow-sm d-flex flex-column justify-content-around" style="background-color: lightblue; height: 150px;">
+        <div class="row ">
+          <div class="col justify-content-around d-flex">
+            <button class="btn btn-lg " {{action "save" model}} style="width: 40%; background-color : #27ae60; color:white;">Save</button>
+            <button class="btn btn-lg btn-danger " {{action "clear" model}} style="width: 40%;">Delete</button>
+
+          </div>
+        </div>
+
+        {{# if model.alertVisible }}
+          <div class="row my-2">
+            <div class="col text-center align-items-center">
+              <p class="p-2 mb-0 shadow-sm rounded" style="background-color: {{model.styleAlerte}};font-size: 20px; color:white;">{{model.info}}</p>
+            </div>
+          </div>
+        {{/if}}
+
+
+      </div>
+
+    </div>
+
+  </div>
 </div>
-
-
-{{outlet}}
